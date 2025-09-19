@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import CareerDiscovery from "./pages/CareerDiscovery";
 import CareerMatching from "./pages/CareerMatching";
 import AICareerMap from "./pages/AICareerMap";
-import SkillEvolution from "./pages/SkillEvolution";
+import Congratulations from "./pages/Congratulations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,7 +23,7 @@ const App = () => (
           <Route path="/career-discovery" element={<CareerDiscovery />} />
           <Route path="/career-matching" element={<CareerMatching />} />
           <Route path="/career-map" element={<AICareerMap />} />
-          <Route path="/skill-evolution" element={<SkillEvolution />} />
+          <Route path="/congratulations" element={<Congratulations />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

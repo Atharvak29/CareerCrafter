@@ -153,9 +153,9 @@ const AICareerMap = () => {
           </div>
           <Button 
             variant="hero"
-            onClick={() => navigate("/skill-evolution")}
+            onClick={() => navigate("/congratulations")}
           >
-            View Dashboard
+            View Results
           </Button>
         </div>
       </header>

@@ -64,7 +64,15 @@ const CareerMatching = () => {
 
   const handleChoosePath = (careerPath: string) => {
     console.log("🚀 User chose career path:", careerPath);
-    navigate("/skill-evolution");
+    navigate("/congratulations", {
+      state: {
+        onboardingData: mockOnboardingData,
+        skills: skills,
+        likedCareers: state.likedCareers,
+        chosenPath: careerPath,
+        careerData: state.careerData
+      }
+    });
   };
 
   const handleBack = () => {
