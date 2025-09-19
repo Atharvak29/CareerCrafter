@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -96,6 +96,34 @@ const mockCareerPaths: CareerPath[] = [
 const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }: CareerPathSuggestionsProps) => {
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [goalType, setGoalType] = useState<string>("long-term");
+
+  // Log component mount and user data
+  useEffect(() => {
+    const componentData = {
+      timestamp: new Date().toISOString(),
+      onboardingData,
+      skills,
+      selectedFilters: {
+        industry: selectedIndustry,
+        goalType: goalType
+      }
+    };
+    console.log("📊 Career Path Suggestions Component Loaded:", componentData);
+  }, [onboardingData, skills]);
+
+  // Log component mount and user data
+  useEffect(() => {
+    const componentData = {
+      timestamp: new Date().toISOString(),
+      onboardingData,
+      skills,
+      selectedFilters: {
+        industry: selectedIndustry,
+        goalType: goalType
+      }
+    };
+    console.log("📊 Career Path Suggestions Component Loaded:", componentData);
+  }, [onboardingData, skills]);
 
   const filteredPaths = mockCareerPaths.filter(path => {
     if (selectedIndustry !== "all" && path.industry !== selectedIndustry) {
@@ -232,7 +260,10 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
                   <Button 
                     variant="hero" 
                     className="w-full mt-4 group-hover:shadow-glow"
-                    onClick={() => onChoosePath(career.id)}
+                    onClick={() => {
+                      console.log("🎯 User selected career path:", career.title, career);
+                      onChoosePath(career.id);
+                    }}
                   >
                     Explore Path
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -247,7 +278,10 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
             <Button 
               size="lg" 
               variant="hero"
-              onClick={() => onChoosePath("selected")}
+              onClick={() => {
+                console.log("🚀 User proceeding to build roadmap with selections");
+                onChoosePath("selected");
+              }}
               className="px-8 py-4 text-lg"
             >
               Choose a Path & Build My Roadmap

@@ -104,6 +104,16 @@ const CareerDiscovery = () => {
     });
   };
 
+  const handleProceedToMatching = () => {
+    const likedCareersList = Array.from(likedCareers);
+    navigate("/career-matching", { 
+      state: { 
+        likedCareers: likedCareersList,
+        careerData: careerVideos.filter(video => likedCareers.has(video.id))
+      }
+    });
+  };
+
   const nextVideo = () => {
     setCurrentIndex(prev => (prev + 1) % careerVideos.length);
   };
@@ -135,9 +145,10 @@ const CareerDiscovery = () => {
             </div>
             <Button 
               variant="hero"
-              onClick={() => navigate("/career-map")}
+              onClick={handleProceedToMatching}
+              disabled={likedCareers.size === 0}
             >
-              See My Career Map
+              {likedCareers.size > 0 ? `View ${likedCareers.size} Matched Careers` : "Like Careers to Continue"}
             </Button>
           </div>
         </div>
@@ -205,9 +216,10 @@ const CareerDiscovery = () => {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => navigate("/career-map")}
+                    onClick={handleProceedToMatching}
+                    disabled={likedCareers.size === 0}
                   >
-                    Learn More
+                    View Matches
                   </Button>
                 </div>
               </div>
