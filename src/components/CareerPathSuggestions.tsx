@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TrendingUp, DollarSign, Target, ArrowRight } from "lucide-react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface OnboardingData {
   name: string;
@@ -30,102 +31,58 @@ interface CareerPath {
   description: string;
 }
 
-const mockCareerPaths: CareerPath[] = [
-  {
-    id: "data-scientist",
-    title: "Data Scientist",
-    matchScore: 92,
-    growthRate: "+22%",
-    averageSalary: "₹12L/year",
-    requiredSkills: ["Python", "Statistics", "Machine Learning", "SQL"],
-    industry: "Technology",
-    description: "Analyze complex data to help organizations make informed decisions"
-  },
-  {
-    id: "product-manager",
-    title: "Product Manager",
-    matchScore: 88,
-    growthRate: "+19%",
-    averageSalary: "₹15L/year",
-    requiredSkills: ["Strategy", "Analytics", "Leadership", "Communication"],
-    industry: "Technology",
-    description: "Drive product vision and strategy from conception to launch"
-  },
-  {
-    id: "ux-designer",
-    title: "UX Designer",
-    matchScore: 85,
-    growthRate: "+18%",
-    averageSalary: "₹10L/year",
-    requiredSkills: ["Design Thinking", "Prototyping", "Research", "Figma"],
-    industry: "Creative Arts",
-    description: "Create intuitive and engaging user experiences for digital products"
-  },
-  {
-    id: "software-engineer",
-    title: "Software Engineer",
-    matchScore: 90,
-    growthRate: "+25%",
-    averageSalary: "₹14L/year",
-    requiredSkills: ["JavaScript", "React", "Node.js", "Git"],
-    industry: "Technology",
-    description: "Build and maintain software applications and systems"
-  },
-  {
-    id: "business-analyst",
-    title: "Business Analyst",
-    matchScore: 83,
-    growthRate: "+14%",
-    averageSalary: "₹9L/year",
-    requiredSkills: ["Excel", "SQL", "Analysis", "Communication"],
-    industry: "Finance",
-    description: "Bridge the gap between business needs and technical solutions"
-  },
-  {
-    id: "digital-marketer",
-    title: "Digital Marketing Manager",
-    matchScore: 81,
-    growthRate: "+16%",
-    averageSalary: "₹8L/year",
-    requiredSkills: ["SEO", "Social Media", "Analytics", "Content Strategy"],
-    industry: "Creative Arts",
-    description: "Plan and execute digital marketing campaigns across multiple channels"
-  }
-];
-
 const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }: CareerPathSuggestionsProps) => {
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
   const [goalType, setGoalType] = useState<string>("long-term");
+  const [careerPaths, setCareerPaths] = useState<CareerPath[]>([]);
 
-  // Log component mount and user data
   useEffect(() => {
-    const componentData = {
-      timestamp: new Date().toISOString(),
-      onboardingData,
-      skills,
-      selectedFilters: {
-        industry: selectedIndustry,
-        goalType: goalType
+    const fetchCareerPaths = async () => {
+      try {
+        const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = `
+          Based on the following user data, generate 6 custom job recommendations in JSON format.
+          
+          User Data:
+          - Onboarding Data: ${JSON.stringify(onboardingData)}
+          - Skills: ${JSON.stringify(skills)}
+
+          JSON output should follow this structure:
+          [
+            {
+              "id": "job-id",
+              "title": "Job Title",
+              "matchScore": 92,
+              "growthRate": "+22%",
+              "averageSalary": "₹12L/year",
+              "requiredSkills": ["Skill 1", "Skill 2"],
+              "industry": "Technology",
+              "description": "Job description."
+            },
+            ...
+          ]
+        `;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = await response.text();
+        
+        // Clean the response to remove markdown formatting
+        const cleanedText = text.replace(/```json\n|```/g, "");
+        const parsedCareerPaths = JSON.parse(cleanedText);
+        setCareerPaths(parsedCareerPaths);
+      } catch (error) {
+        console.error("Error fetching career paths:", error);
       }
     };
-    console.log("📊 Career Path Suggestions Component Loaded:", componentData);
-  }, [onboardingData, skills]);
 
-  // Log component mount and user data
-  useEffect(() => {
-    const componentData = {
-      timestamp: new Date().toISOString(),
-      onboardingData,
-      skills,
-      selectedFilters: {
-        industry: selectedIndustry,
-        goalType: goalType
-      }
-    };
-    console.log("📊 Career Path Suggestions Component Loaded:", componentData);
-  }, [onboardingData, skills]);
+    fetchCareerPaths();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const filteredPaths = mockCareerPaths.filter(path => {
+  const filteredPaths = careerPaths.filter(path => {
     if (selectedIndustry !== "all" && path.industry !== selectedIndustry) {
       return false;
     }
@@ -210,7 +167,7 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
                     {career.description}
                   </CardDescription>
                 </CardHeader>
-                
+
                 <CardContent className="space-y-4">
                   {/* Match Score */}
                   <div className="flex items-center gap-2">
@@ -240,8 +197,8 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
                     <span className="text-sm font-medium">Key Skills:</span>
                     <div className="flex flex-wrap gap-1">
                       {career.requiredSkills.slice(0, 4).map((skill) => (
-                        <Badge 
-                          key={skill} 
+                        <Badge
+                          key={skill}
                           variant={skills.includes(skill) ? "default" : "outline"}
                           className="text-xs"
                         >
@@ -257,8 +214,8 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
                   </div>
 
                   {/* CTA Button */}
-                  <Button 
-                    variant="hero" 
+                  <Button
+                    variant="hero"
                     className="w-full mt-4 group-hover:shadow-glow"
                     onClick={() => {
                       console.log("🎯 User selected career path:", career.title, career);
@@ -275,8 +232,8 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
 
           {/* Main CTA */}
           <div className="text-center pt-8">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="hero"
               onClick={() => {
                 console.log("🚀 User proceeding to build roadmap with selections");

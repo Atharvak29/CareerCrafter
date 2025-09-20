@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Onboarding from "@/components/Onboarding";
 import SkillAssessment from "@/components/SkillAssessment";
 import CareerPathSuggestions from "@/components/CareerPathSuggestions";
 
-type Screen = "onboarding" | "skill-assessment" | "career-paths" | "results";
+type Screen = "onboarding" | "skill-assessment" | "career-paths";
 
 interface OnboardingData {
   name: string;
@@ -16,6 +17,7 @@ const Index = () => {
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [skills, setSkills] = useState<string[]>([]);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const navigate = useNavigate();
 
   const handleOnboardingComplete = (data: OnboardingData) => {
     setOnboardingData(data);
@@ -29,7 +31,14 @@ const Index = () => {
   };
 
   const handleChoosePath = (careerPath: string) => {
-    setCurrentScreen("results");
+    navigate("/congratulations", {
+      state: {
+        onboardingData,
+        skills,
+        resumeFile,
+        chosenPath: careerPath,
+      },
+    });
   };
 
   const handleBack = () => {
@@ -64,39 +73,7 @@ const Index = () => {
     );
   }
 
-  // Results screen (placeholder for now)
-  return (
-    <div className="min-h-screen bg-gradient-subtle flex items-center justify-center">
-      <div className="text-center space-y-6 max-w-2xl mx-auto px-4">
-        <h1 className="text-4xl font-bold">
-          Congratulations, {onboardingData?.name}!
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Your career analysis is being processed. This is where we would show your skill graph and career recommendations.
-        </p>
-        
-        {skills.length > 0 && (
-          <div className="text-left bg-card p-6 rounded-lg shadow-card">
-            <h3 className="font-semibold mb-2">Your Skills:</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.map(skill => (
-                <span key={skill} className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {resumeFile && (
-          <div className="text-left bg-card p-6 rounded-lg shadow-card">
-            <h3 className="font-semibold mb-2">Uploaded Resume:</h3>
-            <p className="text-sm text-muted-foreground">{resumeFile.name}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  return null;
 };
 
 export default Index;
