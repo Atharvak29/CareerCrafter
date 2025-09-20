@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Heart, Share2, ChevronUp, ChevronDown, ArrowLeft } from "lucide-react";
+import { Heart, Share2, ChevronUp, ChevronDown, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface CareerVideo {
@@ -14,7 +14,7 @@ interface CareerVideo {
   growth: string;
   tags: string[];
   description: string;
-  thumbnail: string;
+  videoUrl: string; // Changed from thumbnail to videoUrl
   likes: number;
   isLiked: boolean;
 }
@@ -34,7 +34,7 @@ const CareerDiscovery = () => {
       growth: "+22% growth",
       tags: ["Python", "ML", "Analytics", "Remote"],
       description: "Transform data into insights that drive billion-dollar decisions",
-      thumbnail: "🧠",
+      videoUrl: "https://www.youtube.com/embed/E4pB8CDPklE?autoplay=1&loop=1&playlist=E4pB8CDPklE", // Embedded YouTube Short URL
       likes: 1240,
       isLiked: false
     },
@@ -47,7 +47,7 @@ const CareerDiscovery = () => {
       growth: "+13% growth",
       tags: ["Design", "User Research", "Prototyping", "Creative"],
       description: "Design experiences that millions of users love every day",
-      thumbnail: "🎨",
+      videoUrl: "https://www.youtube.com/embed/SkbVyd7VrtM?autoplay=1&loop=1&playlist=SkbVyd7VrtM", // Embedded YouTube Short URL
       likes: 892,
       isLiked: false
     },
@@ -60,7 +60,7 @@ const CareerDiscovery = () => {
       growth: "+35% growth",
       tags: ["Security", "Ethical Hacking", "Networks", "High-demand"],
       description: "Protect organizations from cyber threats in an AI-driven world",
-      thumbnail: "🔐",
+      videoUrl: "https://www.youtube.com/embed/-2HC--hkK4w?autoplay=1&loop=1&playlist=-2HC--hkK4w", // Embedded YouTube Short URL
       likes: 1580,
       isLiked: false
     },
@@ -73,7 +73,7 @@ const CareerDiscovery = () => {
       growth: "+45% growth", 
       tags: ["AI/ML", "Python", "Deep Learning", "Future-proof"],
       description: "Create AI systems that will reshape how humans work and live",
-      thumbnail: "🤖",
+      videoUrl: "https://www.youtube.com/embed/4UeLTsgdZc8?autoplay=1&loop=1&playlist=4UeLTsgdZc8", // Embedded YouTube Short URL
       likes: 2100,
       isLiked: false
     },
@@ -86,7 +86,7 @@ const CareerDiscovery = () => {
       growth: "+19% growth",
       tags: ["Strategy", "Leadership", "Analytics", "Business"],
       description: "Lead cross-functional teams to build products users can't live without",
-      thumbnail: "📊",
+      videoUrl: "https://www.youtube.com/embed/OM0pR0H1R_A?autoplay=1&loop=1&playlist=OM0pR0H1R_A", // Embedded YouTube Short URL
       likes: 965,
       isLiked: false
     }
@@ -163,14 +163,18 @@ const CareerDiscovery = () => {
             <CardContent className="p-0 h-full flex flex-col">
               
               {/* Video/Preview Area */}
-              <div className="flex-1 relative bg-gradient-hero flex items-center justify-center text-white">
-                <div className="text-center space-y-4">
-                  <div className="text-8xl mb-4">{currentVideo.thumbnail}</div>
-                  <Play className="h-16 w-16 mx-auto opacity-80" />
-                </div>
+              <div className="flex-1 relative bg-gradient-hero flex items-center justify-center text-white overflow-hidden">
+                <iframe
+                  title={currentVideo.title}
+                  src={currentVideo.videoUrl}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                ></iframe>
                 
                 {/* Growth Badge */}
-                <Badge className="absolute top-4 right-4 bg-success text-success-foreground">
+                <Badge className="absolute top-4 right-4 bg-success text-success-foreground z-10">
                   {currentVideo.growth}
                 </Badge>
               </div>
