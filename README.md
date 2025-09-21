@@ -7,9 +7,23 @@
 
 Unlock your professional potential with **CareerCrafter**, an intelligent, AI-driven platform designed to guide you from confusion to clarity in your career journey. By analyzing your unique skills and interests, CareerCrafter doesn't just suggest jobs—it builds a personalized, step-by-step roadmap to help you achieve your dream career.
 
-![Website Image](https://github.com/user-attachments/assets/48458c72-3528-4be1-8e14-6f511d2d4421)
+## 📸 Images
+<div align="center">
 
-![Website Image](URL or Path to the Image)
+<table>
+<tr>
+  <td>
+    <img src="https://github.com/user-attachments/assets/48458c72-3528-4be1-8e14-6f511d2d4421" width="250"/>
+  </td>
+  <td>
+    <img src="https://github.com/user-attachments/assets/78217f37-62f6-464b-89ac-2075c0e282d9" width="400"/><br><br>
+    <img src="https://github.com/user-attachments/assets/76b91531-0b27-4702-815b-cedd56104418" width="400"/>
+  </td>
+</tr>
+</table>
+
+</div>
+
 
 ---
 
