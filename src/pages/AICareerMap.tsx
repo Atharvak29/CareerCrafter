@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import mermaid from "mermaid";
 
 interface Milestone {
@@ -23,25 +22,48 @@ const AICareerMap = () => {
   useEffect(() => {
     const generateRoadmap = async () => {
       try {
-        const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // MOCK DATA - Gemini API Removed
+        // in a real app, fetch this from your backend
+        const mockData = {
+          mermaidCode: `
+            graph TD
+              A[Start Journey] --> B(Learn Fundamentals)
+              B --> C{Build Projects}
+              C -->|Frontend| D[React & UI]
+              C -->|Backend| E[Node & DB]
+              D --> F[Portfolio]
+              E --> F
+              F --> G[Job Application]
+              G --> H[Success!]
+              style A fill:#f9f,stroke:#333,stroke-width:4px
+              style H fill:#90EE90,stroke:#333,stroke-width:2px
+          `,
+          timeline: [
+            {
+              title: "Foundations",
+              description: "Master the basics of the chosen technology stack.",
+              timeframe: "Month 1-2"
+            },
+            {
+              title: "Deep Dive",
+              description: "Advanced concepts and architecture patterns.",
+              timeframe: "Month 3-4"
+            },
+            {
+              title: "Practical Application",
+              description: "Build 2-3 major projects to showcase skills.",
+              timeframe: "Month 5"
+            },
+            {
+              title: "Career Readiness",
+              description: "Resume polishing, mock interviews, and networking.",
+              timeframe: "Month 6"
+            }
+          ]
+        };
 
-        const prompt = `
-          Generate a custom career roadmap for a user interested in becoming a ${chosenPath}.
-          The output should be a JSON object with two properties: "mermaidCode" and "timeline".
-          - "mermaidCode" should be a Mermaid flowchart definition.
-          - "timeline" should be an array of milestone objects, each with a title, description, and timeframe.
-        `;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = await response.text();
-        
-        const cleanedText = text.replace(/```json\n|```/g, "");
-        const { mermaidCode, timeline } = JSON.parse(cleanedText);
-
-        setMermaidCode(mermaidCode);
-        setTimeline(timeline);
+        setMermaidCode(mockData.mermaidCode);
+        setTimeline(mockData.timeline);
       } catch (error) {
         console.error("Error generating roadmap:", error);
       }
@@ -92,10 +114,10 @@ const AICareerMap = () => {
           {/* Mermaid Flowchart */}
           <Card className="shadow-card">
             <CardHeader>
-              <CardTitle className="text-2xl">Your Career Roadmap</CardTitle>
+              <CardTitle className="text-2xl">Your Career Roadmap for {chosenPath}</CardTitle>
             </CardHeader>
-            <CardContent>
-              {mermaidCode && <div className="mermaid">{mermaidCode}</div>}
+            <CardContent className="overflow-x-auto">
+              {mermaidCode && <div className="mermaid flex justify-center">{mermaidCode}</div>}
             </CardContent>
           </Card>
 

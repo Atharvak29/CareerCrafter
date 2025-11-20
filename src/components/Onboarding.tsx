@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-career.jpg";
+import { useRef } from "react";
 
 interface OnboardingData {
   name: string;
@@ -71,7 +72,9 @@ const Onboarding = ({ onComplete }: OnboardingProps) => {
 
   const isFormValid = formData.name.trim() && formData.education;
 
+  
   return (
+
     <div className="min-h-screen bg-gradient-subtle">
       {/* Header */}
       <header className="container mx-auto px-4 py-6">
@@ -218,8 +221,9 @@ const Onboarding = ({ onComplete }: OnboardingProps) => {
                           </div>
                         )}
                       </div>
-
+                      
                       <div className="flex gap-3">
+
                         <Button
                           type="button"
                           variant="outline"
@@ -230,6 +234,7 @@ const Onboarding = ({ onComplete }: OnboardingProps) => {
                           Explore More
                         </Button>
                         <Button
+                       
                           type="submit"
                           variant="hero"
                           size="lg"

@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TrendingUp, DollarSign, Target, ArrowRight } from "lucide-react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface OnboardingData {
   name: string;
@@ -39,40 +38,72 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
   useEffect(() => {
     const fetchCareerPaths = async () => {
       try {
-        const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-        const prompt = `
-          Based on the following user data, generate 6 custom job recommendations in JSON format.
-          
-          User Data:
-          - Onboarding Data: ${JSON.stringify(onboardingData)}
-          - Skills: ${JSON.stringify(skills)}
-
-          JSON output should follow this structure:
-          [
-            {
-              "id": "job-id",
-              "title": "Job Title",
-              "matchScore": 92,
-              "growthRate": "+22%",
-              "averageSalary": "₹12L/year",
-              "requiredSkills": ["Skill 1", "Skill 2"],
-              "industry": "Technology",
-              "description": "Job description."
-            },
-            ...
-          ]
-        `;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = await response.text();
+        // MOCK DATA - Gemini API Removed
+        // This data would typically come from your backend based on user inputs
+        const mockCareerPaths: CareerPath[] = [
+          {
+            id: "job-1",
+            title: "Full Stack Developer",
+            matchScore: 92,
+            growthRate: "+22%",
+            averageSalary: "₹12L/year",
+            requiredSkills: ["React", "Node.js", "TypeScript"],
+            industry: "Technology",
+            description: "Build end-to-end web applications using modern stacks."
+          },
+          {
+            id: "job-2",
+            title: "Data Scientist",
+            matchScore: 85,
+            growthRate: "+25%",
+            averageSalary: "₹15L/year",
+            requiredSkills: ["Python", "SQL", "Machine Learning"],
+            industry: "Technology",
+            description: "Analyze complex data to help organizations make better decisions."
+          },
+          {
+            id: "job-3",
+            title: "Product Manager",
+            matchScore: 78,
+            growthRate: "+15%",
+            averageSalary: "₹18L/year",
+            requiredSkills: ["Leadership", "Strategy", "Communication"],
+            industry: "Technology",
+            description: "Guide the success of a product and lead cross-functional teams."
+          },
+          {
+            id: "job-4",
+            title: "UX Designer",
+            matchScore: 88,
+            growthRate: "+18%",
+            averageSalary: "₹10L/year",
+            requiredSkills: ["Figma", "Prototyping", "User Research"],
+            industry: "Creative Arts",
+            description: "Design intuitive and accessible user experiences."
+          },
+          {
+            id: "job-5",
+            title: "Digital Marketer",
+            matchScore: 70,
+            growthRate: "+20%",
+            averageSalary: "₹8L/year",
+            requiredSkills: ["SEO", "Content Marketing", "Analytics"],
+            industry: "Marketing",
+            description: "Promote brands to connect with potential customers."
+          },
+          {
+            id: "job-6",
+            title: "Financial Analyst",
+            matchScore: 65,
+            growthRate: "+10%",
+            averageSalary: "₹11L/year",
+            requiredSkills: ["Excel", "Financial Modeling", "Accounting"],
+            industry: "Finance",
+            description: "Guide businesses and individuals in investment decisions."
+          }
+        ];
         
-        // Clean the response to remove markdown formatting
-        const cleanedText = text.replace(/```json\n|```/g, "");
-        const parsedCareerPaths = JSON.parse(cleanedText);
-        setCareerPaths(parsedCareerPaths);
+        setCareerPaths(mockCareerPaths);
       } catch (error) {
         console.error("Error fetching career paths:", error);
       }
@@ -138,6 +169,7 @@ const CareerPathSuggestions = ({ onboardingData, skills, onChoosePath, onBack }:
                   <SelectItem value="Finance">Finance</SelectItem>
                   <SelectItem value="Education">Education</SelectItem>
                   <SelectItem value="Creative Arts">Creative Arts</SelectItem>
+                  <SelectItem value="Marketing">Marketing</SelectItem>
                 </SelectContent>
               </Select>
             </div>

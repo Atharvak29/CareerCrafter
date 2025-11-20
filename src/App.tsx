@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Wizard } from "@/components/Wizard";
 import Index from "./pages/Index";
 import CareerDiscovery from "./pages/CareerDiscovery";
 import CareerMatching from "./pages/CareerMatching";
@@ -18,13 +19,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Wizard />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/career-discovery" element={<CareerDiscovery />} />
           <Route path="/career-matching" element={<CareerMatching />} />
-          <Route path="/career-map" element={<AICareerMap />} />
+          <Route path="/ai-career-map" element={<AICareerMap />} />
           <Route path="/congratulations" element={<Congratulations />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
