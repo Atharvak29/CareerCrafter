@@ -26,6 +26,8 @@ Unlock your professional potential with **CareerCrafter**, an intelligent, AI-dr
 
 
 ---
+## Sytem Architecture
+[![](https://mermaid.ink/img/pako:eNp9VV1TozAU_SuZPOzoTlXot33YmUqtdsd1O8WdnVnqQ4TbwlgIJkGt1v--N4G20FbzAJdwcu85J5fwTn0eAO3RuWBpSO4G04TgkNlDPjGlA3iGBU9jSBT5Ri6yaBGQccgkTGmO1QNBXgEEcb-dn0DKvatIXWcPJpaR4mJZAgy4_wjCZPXyOC9Rglw6E68fszee6BDTzCOpKkkqPMjJyY_VOJMhcVDZypStEjIIl2fCx9clAgdZGbCJJBnFbA5kJnhcIGbRAlMgq3wpJJhjz8BJlqgoBtIXfhgp8FUmgBz1_7rEWfAsOC77-EeC8PSFXAj-IitebqNS8qHgicK65IYtQZRT6eEMPVPDoIgzuL2vvncbnttAw1GL2nm1m8j44DA_BIlt4IJ4BrkyfHdTGuQ1l0oSVzEV-aQvJShEO8Mt1nj1pbQLhrTWynLD-mlK0M4ExPGu1Hza2yIMx8iHHV0OOsEiDS3abTPxpQG687SuAaQLvixaYVWUOsTEoDHUstcVvipQEj5KZBTAdhk5GnOhSNeyrD3ZpmlQJheJV9zzzdmVo8eQSdUfj7ziru08gLrh88j3xkyFuNETzoKYpfnkAfCnbLT-dcFPmRiQSV2FVJpj87AJ9j6xy1cFImGL9Z7Lsk1Xgj95-kL6KHk8ut_7WM0HZ7r27m7s4hnxlIFU5Iyl0dn36iaXNnfIxQsTeCwU-NVaeo40sgwQy46SGQhIfNiCNaMcabhp4E_39y0CZMoTic1lMtAajUHELArwkH7XC6ZUhRDj8dvDMGDiUYv9QBzLFHeXiU97SmRQo4Jn85D2Zmwh8SlLA6ZgEDE0Ld7Mpiz5x3m8XoKPtPdOX2nP7linltWwrFa7btWtrtWo0SXtNc5Pu5bd6TY79W6zabfPP2r0zSSwT-utRrvZtTvNtt1s2fUahUAf97_yH4z5z9TwP6OVFARxD0A4HA9IXG_bzY__UQPoEw?type=png)](https://mermaid.live/edit#pako:eNp9VV1TozAU_SuZPOzoTlXot33YmUqtdsd1O8WdnVnqQ4TbwlgIJkGt1v--N4G20FbzAJdwcu85J5fwTn0eAO3RuWBpSO4G04TgkNlDPjGlA3iGBU9jSBT5Ri6yaBGQccgkTGmO1QNBXgEEcb-dn0DKvatIXWcPJpaR4mJZAgy4_wjCZPXyOC9Rglw6E68fszee6BDTzCOpKkkqPMjJyY_VOJMhcVDZypStEjIIl2fCx9clAgdZGbCJJBnFbA5kJnhcIGbRAlMgq3wpJJhjz8BJlqgoBtIXfhgp8FUmgBz1_7rEWfAsOC77-EeC8PSFXAj-IitebqNS8qHgicK65IYtQZRT6eEMPVPDoIgzuL2vvncbnttAw1GL2nm1m8j44DA_BIlt4IJ4BrkyfHdTGuQ1l0oSVzEV-aQvJShEO8Mt1nj1pbQLhrTWynLD-mlK0M4ExPGu1Hza2yIMx8iHHV0OOsEiDS3abTPxpQG687SuAaQLvixaYVWUOsTEoDHUstcVvipQEj5KZBTAdhk5GnOhSNeyrD3ZpmlQJheJV9zzzdmVo8eQSdUfj7ziru08gLrh88j3xkyFuNETzoKYpfnkAfCnbLT-dcFPmRiQSV2FVJpj87AJ9j6xy1cFImGL9Z7Lsk1Xgj95-kL6KHk8ut_7WM0HZ7r27m7s4hnxlIFU5Iyl0dn36iaXNnfIxQsTeCwU-NVaeo40sgwQy46SGQhIfNiCNaMcabhp4E_39y0CZMoTic1lMtAajUHELArwkH7XC6ZUhRDj8dvDMGDiUYv9QBzLFHeXiU97SmRQo4Jn85D2Zmwh8SlLA6ZgEDE0Ld7Mpiz5x3m8XoKPtPdOX2nP7linltWwrFa7btWtrtWo0SXtNc5Pu5bd6TY79W6zabfPP2r0zSSwT-utRrvZtTvNtt1s2fUahUAf97_yH4z5z9TwP6OVFARxD0A4HA9IXG_bzY__UQPoEw)
 
 ## ✨ Key Features
 
@@ -45,13 +47,18 @@ CareerCrafter is packed with features to make your career planning seamless and 
 
 This project is built with a modern, robust, and scalable tech stack:
 
-* **Frontend**: [React](https://reactjs.org/) & [Vite](https://vitejs.dev/)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn/ui](https://ui.shadcn.com/)
-* **AI Integration**: [Google Generative AI (Gemini)](https://ai.google.dev/)
-* **Routing**: [React Router DOM](https://reactrouter.com/)
-* **State Management**: React Hooks & Context API
-* **Data Fetching**: [@tanstack/react-query](https://tanstack.com/query/latest)
-* **Diagramming**: [Mermaid.js](https://mermaid-js.github.io/mermaid/#/)
+## Frontend
+- **Framework:** React (TypeScript) + Vite  
+- **Styling:** Tailwind CSS + Shadcn UI  
+- **Animations:** Framer Motion (for parallax & layout transitions)  
+- **Visualization:** Mermaid.js (for roadmap flowcharts)  
+- **State Management:** React Query (TanStack Query)
+
+## Backend
+- **Framework:** FastAPI (Python)  
+- **AI Engine:** Groq SDK (Llama 3.1-70b-versatile)  
+- **Server:** Uvicorn  
+
 
 ---
 
