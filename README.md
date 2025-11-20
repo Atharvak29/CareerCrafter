@@ -82,7 +82,7 @@ To get a local copy up and running, follow these simple steps.
     * Create a `.env` file in the root of the project.
     * Add your Google Gemini API key:
         ```
-        VITE_GEMINI_API_KEY=YOUR_API_KEY
+        GROQ_API_KEY=gsk_your_actual_api_key_here
         ```
 5.  **Run the development server**
     ```sh
@@ -91,6 +91,11 @@ To get a local copy up and running, follow these simple steps.
     The application will be available at `http://localhost:8080`.
 
 ---
+1. Backend
+   Navigate to \backend and run
+   ```
+   uvicorn main:app --reload --port 8000
+   ```
 
 ## 📖 How to Use CareerCrafter
 
