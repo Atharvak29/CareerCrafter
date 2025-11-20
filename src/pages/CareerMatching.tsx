@@ -83,6 +83,7 @@ const CareerMatching = () => {
     <CareerPathSuggestions
       onboardingData={mockOnboardingData}
       skills={skills}
+      userLikedCareers={state.careerData} // Pass the data here
       onChoosePath={handleChoosePath}
       onBack={handleBack}
     />
