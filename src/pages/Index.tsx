@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Onboarding from "@/components/Onboarding";
 import SkillAssessment from "@/components/SkillAssessment";
 import CareerPathSuggestions from "@/components/CareerPathSuggestions";
+import LandingCover from "@/components/LandingCover";  
+
 
 type Screen = "onboarding" | "skill-assessment" | "career-paths";
 
@@ -13,11 +15,16 @@ interface OnboardingData {
 }
 
 const Index = () => {
+  const [showCover, setShowCover] = useState(true);
   const [currentScreen, setCurrentScreen] = useState<Screen>("onboarding");
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [skills, setSkills] = useState<string[]>([]);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const navigate = useNavigate();
+
+  const handleCoverFinish = () => {
+    setShowCover(false);
+  };
 
   const handleOnboardingComplete = (data: OnboardingData) => {
     setOnboardingData(data);
@@ -49,13 +56,17 @@ const Index = () => {
     }
   };
 
+  if (showCover) {
+    return <LandingCover onFinish={handleCoverFinish} />;
+  }
+
   if (currentScreen === "onboarding") {
     return <Onboarding onComplete={handleOnboardingComplete} />;
   }
 
   if (currentScreen === "skill-assessment") {
     return (
-      <SkillAssessment 
+      <SkillAssessment
         onComplete={handleSkillAssessmentComplete}
         onBack={handleBack}
       />
@@ -75,5 +86,4 @@ const Index = () => {
 
   return null;
 };
-
 export default Index;
